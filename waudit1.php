@@ -24,7 +24,7 @@ require_once("class/__functions.php"); 				// View class renders output our cust
 Class GakplSecurityAudit {
 
 public $plugin_name = 'Waudit Security';
-public $plugin_slug = 'waudit1';
+public $plugin_slug = 'securemoz-security-audit';
 public $pp = 'waudit'; // Plugin Prefix for options,tables, other db related data
 public $plugin_backupdir = 'backups';
 public $plugin_backupdir_files = 'files';
@@ -1424,48 +1424,6 @@ public function options_server() {
 	return $html;
 }
 
-
-/*
-*	Tab: Backups
-*/
-
-/*public function admin_form_database_backup() {
-	$html = '';
-	$html .=  $this->postboxer('top',"Backup database");
-
-	$t = "admin_form_database_backup";
-	$html .= '<p>Please backup your database before making any changes!</p>';
-	$html .= '<p><strong>Database last backed up: </strong>';
-	$html .= ($this->waudit_get_option('database_backed_up')) ? $this->waudit_get_option('database_backed_up') : 'never' ;
-	$html .= '</p>';
-	$html .= '<p><strong>Database backup size: </strong>';
-	$html .= ($this->waudit_get_option('database_backed_up_size')) ? $this->waudit_get_option('database_backed_up_size') : 'not available' ;
-	$html .= '</p>';
-	$html .= '<p><strong>Total backups: </strong>';
-	$html .= $this->count_files($this->backupdir.$this->plugin_database_dir,'count');
-	$html .= '</p>';
-	$html .= '<p><strong>Total backups size: </strong>';
-	$html .= $this->H->human_filesize($this->count_files($this->backupdir.$this->plugin_database_dir,'size'), $decimals=2);
-	$html .= '</p>';
-	$d = $this->backupdir.$this->plugin_database_dir;
-	if (is_dir($d) && is_writable($d)) {
-
-		$html .= '<p class="color-green">Database backup directory is writable.</p>';
-		$html .='<form method="post" action="'. admin_url( 'admin.php?page='.$this->plugin_slug.'&tab=options_backups').'">
-				<p class="submit"><input type="hidden" name="waudit_submitted_form" value="'.$t.'" />
-				'. wp_nonce_field("waudit_{$t}", "waudit_nonce_{$t}").'
-				<input type="submit" class="button-primary" value="Create database backup" />
-				</p>
-				</form>
-				';
-	} else {
-		$html .= '<p class="color-red">Database backup directory is not writable.<p></p> Make directory <code>'.$d.'</code> writable in order to backup database.</p>';
-	}
-
-	$html .=  $this->postboxer('bottom');
-	return $html;
-}*/
-
 public function gtml_form_field($pre, $slug, $options, $classes="") {
 
 	$category = str_replace('setting', '', str_replace('_', '', $pre));
@@ -1653,19 +1611,6 @@ $html 	=  $this->postboxer('top',"Backup");
 				
 				</tbody>
 			</table>';
-
-
-/*	add_thickbox();
-
-	$html .= '<div id="display-date-format-help" style="display:none;">
-     <p>
-          This is my hidden content! It will appear in ThickBox when the link is clicked.
-     </p>
-</div>
-
-<a href="#TB_inline?width=200&height=300&inlineId=display-date-format-help" class="thickbox">View my inline content!</a>';
-	*/
-
 
 	$html .= '<h3 class="title normaltitle">E-mail</h3> (<a href="http://wpsecurity.securemoz.com/" title="PRO Version" target="_blank">Upgrade To SecureMoz PRO</a>)';
 
@@ -2021,118 +1966,6 @@ public function make_database_backup($filename,$format) {
 	}
 	
 }
-
-/*public function admin_form_configphp_backup() {
-	$html = '';
-	$html .=  $this->postboxer('top',"Backup wp-config.php");
-
-	$t = "admin_form_configphp_backup";
-	$html .= '<p>This is where you can backup you wp-config.php file before making any changes.</p>';
-	$html .= ($this->waudit_get_option('wpconfigphp_backed_up')) ? '<p><strong>File wp-config.php last backed up: </strong>'.$this->waudit_get_option('wpconfigphp_backed_up').'</p>' : false ;
-	$html .= '</p>';
-	$html .= '<p><strong>Backup size: </strong>';
-	$html .= ($this->waudit_get_option('wpconfigphp_backed_up_size')) ? $this->waudit_get_option('wpconfigphp_backed_up_size') : 'not available' ;
-	$html .= '</p>';
-	$html .= '<p><strong>Total backups: </strong>';
-	$html .= $this->count_files($this->backupdir.$this->plugin_wpconfig_dir,'count');
-	$html .= '</p>';
-	$html .= '<p><strong>Total backups size: </strong>';
-	$html .= $this->H->human_filesize($this->count_files($this->backupdir.$this->plugin_wpconfig_dir,'size'), $decimals=2);
-	$html .= '</p>';
-
-	$d = $this->backupdir.$this->plugin_database_dir;
-	if (is_dir($d) && is_writable($d)) {
-
-		$html .= '<p class="color-green">File backup directory is writable.</p>';
-		$html .='<form method="post" action="'. admin_url( 'admin.php?page='.$this->plugin_slug.'&tab=options_backups').'">
-				<p class="submit"><input type="hidden" name="waudit_submitted_form" value="'.$t.'" />
-				'. wp_nonce_field("waudit_{$t}", "waudit_nonce_{$t}").'
-				<input type="submit" class="button-primary" value="Create backup" />
-				</p>
-				</form>
-				';
-	} else {
-		$html .= '<p class="color-red">Database backup directory is not writable.<p></p> Make directory <code>'.$d.'</code> writable in order to backup database.</p>';
-	}
-
-	$html .=  $this->postboxer('bottom');
-	return $html;
-}
-public function do_form_admin_form_configphp_backup() {
-	$html='';
-	$newfile = '';
-	$time = time();
-	$d = $this->backupdir.$this->plugin_wpconfig_dir;
-	$file = $this->root_path.'wp-config.php';
-	$file_backup = $d.'/wp-config-'.$time.'.php';
-	// File1
-	$handle = @fopen($file_backup, "w+");
-	// File2
-	$file_contents = file_get_contents($file);
-	if ($handle && $file_contents) {
-		if (is_dir($d) && is_writable($d)) {
-			fwrite($handle, $file_contents);
-		    fclose($handle);    
-		    $this->waudit_update_option('wpconfigphp_backed_up', date('d.m.Y G:i'));
-			$size = filesize($file_backup);	
-			$this->waudit_update_option('wpconfigphp_backed_up_size', $this->H->human_filesize($size, $decimals=2));
-			chmod($file_backup, $this->backup_file_permission);
-
-		    $html .= $this->message('File wp-config.php successfully backed up!','updated');
-		} else {
-			$this->message('Error: Creating backup failed.','error');
-		}
-	} else {
-		$this->message('Error: Reading wp-config.php file failed.','error');
-	}
-
-	return $html;	
-}*/
-/*public function admin_form_full_backup() {
-
-	$html = '';
-	$html .=  $this->postboxer('top',"Full System Backup");
-
-	$t = "admin_form_full_backup";
-	$html .= '<p>This generates full system backup, including plugins, themes, configuration. This will not back up the database. Note that full system backups can take couple of minutes, do NOT close the browser while backup is in process!</p>';
-	$html .= '<p><strong>System last backed up: </strong>';
-	$html .= ($this->waudit_get_option('system_backed_up')) ? $this->waudit_get_option('system_backed_up') : 'never' ;
-	$html .= '</p>';
-	$html .= '<p><strong>System backup size: </strong>';
-	$html .= ($this->waudit_get_option('system_backed_up_size')) ? $this->waudit_get_option('system_backed_up_size') : 'not available' ;
-	$html .= '</p>';
-	$html .= '<p><strong>System backup time: </strong>';
-	$html .= ($this->waudit_get_option('system_backed_up_time')) ? $this->waudit_get_option('system_backed_up_time').' seconds' : 'not available' ;
-	$html .= '</p>';
-	$html .= '<p><strong>Total backups: </strong>';
-	$html .= $this->count_files($this->backupdir.$this->plugin_system_dir,'count');
-	$html .= '</p>';
-	$html .= '<p><strong>Total backups size: </strong>';
-	$html .= ($this->waudit_get_option('system_backed_up_size_total')) ? $this->waudit_get_option('system_backed_up_size_total') : 'not available' ;
-	$html .= '</p>';
-
-	$d = $this->backupdir.$this->plugin_system_dir;
-	if (is_dir($d) && is_writable($d)) {
-		$html .= '<p class="color-green">System backup directory is writable.</p>';
-	} else {
-		$html .= '<p class="color-red">System backup directory is not writable.<p></p> Make directory <code>'.$d.'</code> writable in order to backup system.</p>';
-	}
-	if (is_dir($this->root_path) && is_readable($this->root_path)) {
-		$html .= '<p class="color-green">System itself is readable.</p>';
-	} else {
-		$html .= '<p class="color-red">System itself is not writable.<p></p> Make directory <code>'.$d.'</code> writable in order to backup system.</p>';
-	}
-	$html .='<form method="post" action="'. admin_url( 'admin.php?page='.$this->plugin_slug.'&tab=options_backups').'">
-			<p class="submit"><input type="hidden" name="waudit_submitted_form" value="'.$t.'" />
-			'. wp_nonce_field("waudit_{$t}", "waudit_nonce_{$t}").'
-			<input type="submit" class="button-primary" value="Create system backup" />
-			</p>
-			</form>
-			';
-
-	$html .=  $this->postboxer('bottom');
-	return $html;
-}*/
 
 public function make_files_backup($filename,$format) {
 	
