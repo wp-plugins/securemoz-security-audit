@@ -21,7 +21,7 @@ SecureMoz Security Audit check for : Viruses, Malware, Blacklist, Drive-By Downl
 
 = User Guide for SecureMoz Security Audit =
 
-https://www.youtube.com/watch?v=8NNc6ycWbhw
+
 
 
 > ### Watch the Video on our website
