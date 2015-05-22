@@ -59,13 +59,13 @@ Or go to our user guide page at : wpsecurity.securemoz.com/about/faq
 
 == Screenshots ==
 
-1. Security Audit SCAN website files and folders.  `/assets/01_preview1.jpg`.
-2. Settings tab PHP Control your htaccess from SecureMoz Window.  `/assets/02_preview2.jpg`.   
-3. Backup files Create file and/or Database backup compress with zip or (Sql,ZIP, Tar,Tar.gz).  `/assets/03_preview3.jpg`.
-4. Prevent WordPress database security attacks.  `/assets/04_preview4.jpg`.
-5. Server Bulk fixes important file permissions.  `/assets/05_preview5.jpg`.
-6. User security permissions.  `/assets/06_preview6.jpg`.
-7. * Configuration Make files more secure using htaccess file, Protect file from public access on server-side.  `/assets/07_preview7.jpg`.
+1. Security Audit SCAN website files and folders.
+2. Settings tab PHP Control your htaccess from SecureMoz Window.
+3. Backup files Create file and/or Database backup compress with zip or (Sql,ZIP, Tar,Tar.gz).
+4. Prevent WordPress database security attacks.
+5. Server Bulk fixes important file permissions.
+6. User security permissions.
+7. * Configuration Make files more secure using htaccess file, Protect file from public access on server-side.
 
 == Changelog ==
 
