@@ -17,12 +17,7 @@ Protecting your Website, Blog or WordPress site with amazingly powerful and real
 There is nothing in the market like it to combat the intrusion of Viruses, Malware, and all types of Security threats 
 and can even test a site if it has been blacklisted!
 
-== SecureMoz Audit Security Pro Features ==
-
-Our expert team is here to help you check our SecureMoz PRO features to take your site's security to the next level with <a href="http://wpsecurity.securemoz.com">SecureMoz Pro</a>.
-
-==Securemoz FREE Version ==
-
+Securemoz FREE Version
 
 * Perform security audit Unique Security score system the score is determined by running 27 unique tests, out of which 10 reported security threats all tests contain form to solve the problem, or a tip how to fix if it is outside range of WordPress.
 * Malware & Viruses Scanner Securemoz Waudit API to connect with some public and private resources and other APIs We check for Viruses, Malware, Blacklist, Drive-By Downloads, Malicious Downloads, Worms, Suspicious Applications, Suspicious Browser Changes, Security Risks, Heuristic Viruses, Adware, Trojans, Phishing Attacks, Spyware, Backdoors, Remote Access Software, Information Stealers, Dialers, Downloaders and Embedded Link to Malicious Site, among many others, in more than 53 different sites.
@@ -32,7 +27,7 @@ Our expert team is here to help you check our SecureMoz PRO features to take you
 * User Check/Change Status: User “admin” exists or not
 * Configuration Make files more secure using .htaccess file, Protect file from public access on server-side.
 
-== SecureMoz Pro Features: ==
+SecureMoz Pro Features
 
 * Security Audit SCAN website files and folders with no monthly limit.
 * Malware & Viruses Scanner Scan Your website up to 40 times a month.
@@ -42,14 +37,10 @@ Our expert team is here to help you check our SecureMoz PRO features to take you
 * Configuration tab Generate New Security Keys.
 * Configuration tab Prevent inside directories from public browsing.
 
-== Upgrade Notice ==
-In our ongoing effort to improve our wordpress plugin performance, we will be making updates to the plugin by weekly.
-This continues to remain our top priority and we encourage you to share your experience with our support team post the update.
+== Installation ==
 
-== Support by SecureMoz ==
-
-SecureMoz has been building and supporting Anti-Malware tools since 2012 powerd by securehunter.com. 
-
+Use our Video Guide at wpsecurity.securemoz.com for step by step installation.
+Or go to our user guide page at : wpsecurity.securemoz.com/about/faq
 
 == Frequently Asked Questions ==
 
@@ -66,22 +57,36 @@ SecureMoz has been building and supporting Anti-Malware tools since 2012 powerd 
 = Is this plugin legal to use? =
 * Yes. It's your site you can do whatever you want with it. Running tests on other people's sites is illegal but SecureMoz can only perform tests on the WP it's installed on.
 
-
 == Screenshots ==
 
-After Installing SecureMoz Security Audit will guide you through our online Documentation ,Video & Screen shots
-
-== Installation ==
-
-Use our Video Guide at wpsecurity.securemoz.com for step by step installation.
-Or go to our user guide page at : wpsecurity.securemoz.com/about/faq
-
- 
-== License ==
-Released under the terms of the GNU General Public License.
+1. Security Audit SCAN website files and folders.  `/assets/01_preview1.jpg`.
+2. Settings tab PHP Control your htaccess from SecureMoz Window.  `/assets/02_preview2.jpg`.   
+3. Backup files Create file and/or Database backup compress with zip or (Sql,ZIP, Tar,Tar.gz).  `/assets/03_preview3.jpg`.
+4. Prevent WordPress database security attacks.  `/assets/04_preview4.jpg`.
+5. Server Bulk fixes important file permissions.  `/assets/05_preview5.jpg`.
+6. User security permissions.  `/assets/06_preview6.jpg`.
+7. * Configuration Make files more secure using htaccess file, Protect file from public access on server-side.  `/assets/07_preview7.jpg`.
 
 == Changelog ==
 
 = 1.0.1 =
 * Enhancement:We check for Viruses, Malware, Blacklist, Drive-By Downloads, Malicious Downloads, Worms, Suspicious Applications, Suspicious Browser Changes, Security Risks, Heuristic Viruses, Adware, Trojans, Phishing Attacks, Spyware, Backdoors, Remote Access Software, Information Stealers, Dialers, Downloaders and Embedded Link To Malicious Site, among many others, in more than 53 differents sites. 
 * Bug Fix: Invalid header
+
+
+== Upgrade Notice ==
+In our ongoing effort to improve our wordpress plugin performance, we will be making updates to the plugin by weekly.
+This continues to remain our top priority and we encourage you to share your experience with our support team post the update.
+
+== Support ==
+
+Our expert team is here to help you check our SecureMoz PRO features to take your site's security to the next level with <a href="http://wpsecurity.securemoz.com">SecureMoz Pro</a>.
+SecureMoz has been building and supporting Anti-Malware tools since 2012 powerd by securehunter.com. 
+
+== Other Notes ==
+
+After Installing SecureMoz Security Audit will guide you through our online Documentation ,Video & Screen shots
+ 
+== License ==
+Released under the terms of the GNU General Public License.
+
