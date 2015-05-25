@@ -3198,9 +3198,9 @@ public function admin_form_safety_test3() {
 			$html .= "<td>";
 
 			if ($test_result) {
-				$html .= ($l = $this->T->get_test_field($test_name, 'fix')) ? '<a href="admin.php?page=waudit1&tab='.$l.$append_test_name.'">'.$this->H->gtml_img('hammer_arrow.png', array('title'=>'Waudit fix available')).'</a>' : '' ;
+				$html .= ($l = $this->T->get_test_field($test_name, 'fix')) ? '<a href="admin.php?page=securemoz-security-audit&tab='.$l.$append_test_name.'">'.$this->H->gtml_img('hammer_arrow.png', array('title'=>'Waudit fix available')).'</a>' : '' ;
 				$html .= ($l = $this->T->get_test_field($test_name, 'fix_wp')) ? '<a href="'.$siteurl.$l.'">'.$this->H->gtml_img('hammer_plus.png', array('title'=>'Wordpress fix available')).'</a>' : '' ;
-				$html .= ($l = $this->T->get_test_field($test_name, 'fix_tip') && $lu = $this->T->get_test_field($test_name, 'fix_tip_url')) ? '<a href="admin.php?page=waudit1&tab='.$lu.$append_test_name.'">'.$this->H->gtml_img('hammer_pencil.png', array('title'=>'Tip available')).'</a>' : '' ;
+				$html .= ($l = $this->T->get_test_field($test_name, 'fix_tip') && $lu = $this->T->get_test_field($test_name, 'fix_tip_url')) ? '<a href="admin.php?page=securemoz-security-audit&tab='.$lu.$append_test_name.'">'.$this->H->gtml_img('hammer_pencil.png', array('title'=>'Tip available')).'</a>' : '' ;
 			}
 
 			$html .= "</td>";
