@@ -22,9 +22,7 @@ SecureMoz Security Audit check for : Viruses, Malware, Blacklist, Drive-By Downl
 = SecureMoz Security Audit =
 https://www.youtube.com/watch?v=aqvVJucO5xg
 
-= User Guide for SecureMoz Security Audit =
 
-https://www.youtube.com/watch?v=gTEugs4H1ro
 
 
 > ### Watch the Video on our website
@@ -53,6 +51,12 @@ https://www.youtube.com/watch?v=gTEugs4H1ro
 * Configuration tab Generate New Security Keys.
 * Configuration tab Prevent inside directories from public browsing.
 * Find more details on our video guide
+
+
+= User Guide for SecureMoz Security Audit =
+
+https://www.youtube.com/watch?v=gTEugs4H1ro
+
 
 == Installation ==
 
