@@ -19,6 +19,9 @@ and can even test a site if it has been blacklisted!
 
 SecureMoz Security Audit check for : Viruses, Malware, Blacklist, Drive-By Downloads, Malicious Downloads, Worms, Suspicious Applications, Suspicious Browser Changes, Security Risks, Heuristic Viruses, Adware, Trojans, Phishing Attacks, Spyware, Backdoors, Remote Access Software, Information Stealers, Dialers, Downloaders and Embedded Link To Malicious Site, among many others, in more than 53 different sites. 
 
+= SecureMoz Security Audit =
+https://www.youtube.com/watch?v=aqvVJucO5xg
+
 = User Guide for SecureMoz Security Audit =
 
 https://www.youtube.com/watch?v=gTEugs4H1ro
