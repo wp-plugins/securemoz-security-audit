@@ -1446,7 +1446,7 @@ function CheckHash($Hashnum)
         //get google pagerank
 function getpagerank($url) {
     $query="http://toolbarqueries.google.com/tbr?client=navclient-auto&ch=".CheckHash(HashURL($url)). "&features=Rank&q=info:".$url."&num=100&filter=0";
-    $data=file_get_contents_curl($query);
+    $data=file_get_contents_curl_ex($query);
     //print_r($data);
     $pos = strpos($data, "Rank_");
     if($pos === false){} else{
@@ -1454,7 +1454,7 @@ function getpagerank($url) {
         return $pagerank;
     }
 }
-function file_get_contents_curl($url) {
+function file_get_contents_curl_ex($url) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
