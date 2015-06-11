@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: SecureMoz Security Audit
-Version: v1.0.1
+Version: 1.0.2
 Plugin URI: http://wpsecurity.securemoz.com/
 Author: Ram, Haim
 Author URI: http://wpsecurity.securemoz.com/
@@ -1408,6 +1408,10 @@ public function options_server() {
 	$html .= $this->admin_form_chmod();
 	$html .= $this->postbox_col('bottom');
 
+	$html .= $this->postbox_col('top',0,100);
+	$html .= $this->scan_core_files();
+	$html .= $this->postbox_col('bottom');
+	
 	$html .= $this->postbox_col('top',2,49);
 	$html .= $this->admin_form_server_php1();
 	$html .= $this->admin_form_server_php4();
@@ -2674,7 +2678,6 @@ public function admin_form_chmod() {
 			';
 	
 	$html .=  $this->postboxer('bottom');
-
 	return $html;
 }
 
@@ -3132,6 +3135,7 @@ public function admin_form_safety_test() {
 		$score = $score_data;
 	}
 
+  
 	$html .=  $this->postboxer('top',"Perform security audit");
 	$html .= '<div class="columns3">';
 		$html .= '<div class="col col1">';
@@ -3649,15 +3653,118 @@ Server verifire
 public function server_verifire($f) {
   $request = "http://wpsecurity.securemoz.com/smwpchecker.php?verify=".$_SERVER['SERVER_NAME'].$f;
   $data = file_get_contents($request);
-  return $data; 
+  //return $data;
+return 0;  
 }
 
 public function malware_verifire($f) {
   $request = "http://wpsecurity.securemoz.com/smwpmalware.php?verify=".$_SERVER['SERVER_NAME'].$f;
   $data = file_get_contents($request);
-  return $data; 
+  //return $data; 
+  return 0;
 }
+
+
+public function scan_core_files(){
+  $wpVer = get_bloginfo('version');
+  $wpSigFile = "http://wpsecurity.securemoz.com/sigs/wpcoresig-".$wpVer.".sig";
+   //echo $wpSigFile;
+  $wpSigCode = file_get_contents($wpSigFile);
+  $wpSigCodeArr[] = explode(" ",$wpSigCode);;//json_decode(json_encode($wpSigCode), true);
+  $fewLines = explode("\n", $wpSigCode);
+  $lastLine = $fewLines[count($fewLines) - 1];
+  $wpFiles = $this->find_all_files($this->fs_get_wp_config_path());
+
+  $countOK = 0;
+ $countNot = 0; 
+  foreach($wpFiles as $f){
+		$tmpA = explode("|",$f);
+		//var_dump($tmpA);
+		if(is_string($tmpA[1])){
+			if(strstr($wpSigCode,$tmpA[1])){
+				for($c=0;$c<count($fewLines) - 1;$c++){
+					if(strstr($fewLines[$c],$tmpA[1])){$fewLines[$c]="";}//echo $fewLines[$c]."--->".$tmpA[0]."<br/>";}
+				}
+				$countOK++;
+			}else{
+				$countNot++;
+			}
+		
+		}	
+	}
+	$html ='';
+	
+$html .=  $this->postboxer('top',"Core Wordpress Files");
+
+	// List permissions
+	$html .= "<table class=\"nsawide\"><thead><th>File Name</th><th>Status</th></thead><tbody>";			
+		
+	if(intval($lastLine) === intval($countOK)){$html .= "<tr><td>Core File Match</td><td>OK</td></tr>";}else{
+		for($c=0;$c<count($fewLines) - 1;$c++){
+					if($fewLines[$c] != ""){
+						$tmpC = explode(" ",$fewLines[$c]);
+						$html .= "<tr class=\"backgroundcolor-red\">";
+						$html .= "<td>".$tmpC[2]."</td>";						
+						$html .= "<td>Has been change</td></tr>";
+						}
+		}
+	}
+
+	$html .= "</tbody></table>";
+	$html .=  $this->postboxer('bottom');
+return $html;
 }
+
+function find_all_files($dir) 
+{ 
+    $root = scandir($dir); 
+    foreach($root as $value) 
+    { 
+        if($value === '.' || $value === '..') {continue;} 
+        if(is_file("$dir/$value")) {
+			$tmpFile = "$dir/$value";
+			$tmpMd5 = @md5_file($tmpFile);
+			$result[]="$tmpFile|$tmpMd5";
+			continue;
+		} 
+        foreach(@$this->find_all_files("$dir/$value") as $value) 
+        { 
+            $tmpFile = $value;
+			$tmpMd5 = @md5_file($tmpFile);
+			$result[]="$tmpFile|$tmpMd5"; 
+        } 
+    }
+	//var_dump($result);
+  
+    return $result; 
+}
+
+function fs_get_wp_config_path()
+{
+    $base = dirname(__FILE__);
+    $path = false;
+
+    if (@file_exists(dirname(dirname($base))."/wp-config.php"))
+    {
+        $path = dirname(dirname($base));
+    }
+    else
+    if (@file_exists(dirname(dirname(dirname($base)))."/wp-config.php"))
+    {
+        $path = dirname(dirname(dirname($base)));
+    }
+    else
+    $path = false;
+
+    if ($path != false)
+    {
+        $path = str_replace("\\", "/", $path);
+    }
+    return $path;
+}
+
+}
+
 #endif;
 
 
