@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 Plugin Name: SecureMoz Security Audit
 Version: 1.0.3
