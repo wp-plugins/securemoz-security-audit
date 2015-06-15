@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 /*
 Plugin Name: SecureMoz Security Audit
-Version: 1.0.2
+Version: 1.0.3
 Plugin URI: http://wpsecurity.securemoz.com/
 Author: Ram, Haim
 Author URI: http://wpsecurity.securemoz.com/
