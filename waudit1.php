@@ -544,9 +544,7 @@ public function waudit_admin_menu_page() {
 				<li><i class=\"icon-archive\"></i>&nbsp;Full Wordpress Installation backup
 				<li><i class=\"icon-list-alt\"></i>&nbsp;Full Wordpress database backup
 			</ul>";
-		?>
-		
-		
+		?>		
 		<div class="metabox-holder has-right-sidebar columns-1">
 			<div class="inner-sidebar">
 				<?php echo $this->waudit_sidebar(); ?>
@@ -3653,19 +3651,40 @@ Server verifire
 public function server_verifire($f) {
   $request = "http://wpsecurity.securemoz.com/smwpchecker.php?verify=".$_SERVER['SERVER_NAME'].$f;
   $data = file_get_contents($request);
-  //return $data;
-return 0;  
+  return $data;  
 }
 
 public function malware_verifire($f) {
   $request = "http://wpsecurity.securemoz.com/smwpmalware.php?verify=".$_SERVER['SERVER_NAME'].$f;
   $data = file_get_contents($request);
-  //return $data; 
-  return 0;
+  return $data; 
 }
 
-
 public function scan_core_files(){
+
+//  $html = $this->postboxer('top',"Core Wordpress Files");
+  $html .= ('
+        <div style="width:100%; margin-right:0%; float:left;"><div class="postbox"><h3><span>Core Wordpress File Scanner</span></h3><div class="inside">
+        <table class="form-table">        
+          <tbody>
+          <form id="analyze_core_files" action="" method="POST">
+  				  <tr>
+    					<td>
+    					 <button type="submit" name="submit" class="button-primary" value="submit">Run scan</button> 
+               <input type="hidden" name="waudit_scan_core_files" value="waudit_scan_core_files" />         
+              </td>
+            </tr>
+          </form>
+          </tbody>
+          </table>');
+          if($_POST["waudit_scan_core_files"] === "waudit_scan_core_files") {
+            $html .= $this->do_scan_core_files();
+          }
+  $html .=  $this->postboxer('bottom');        
+  echo $html;        
+}
+
+public function do_scan_core_files(){
   $wpVer = get_bloginfo('version');
   $wpSigFile = "http://wpsecurity.securemoz.com/sigs/wpcoresig-".$wpVer.".sig";
    //echo $wpSigFile;
@@ -3717,26 +3736,33 @@ return $html;
 
 function find_all_files($dir) 
 { 
+  if(strpos($dir,"wp-content") == false){
+  
     $root = scandir($dir); 
     foreach($root as $value) 
     { 
-        if($value === '.' || $value === '..') {continue;} 
-        if(is_file("$dir/$value")) {
-			$tmpFile = "$dir/$value";
-			$tmpMd5 = @md5_file($tmpFile);
-			$result[]="$tmpFile|$tmpMd5";
-			continue;
-		} 
+      if($value === '.' || $value === '..') {continue;} 
+      if(is_file("$dir/$value")) {
+  			$tmpFile = "$dir/$value";
+  			$tmpMd5 = @md5_file($tmpFile);
+  			$result[]="$tmpFile|$tmpMd5";
+  			continue;
+  		} 
+    
+    $tmp = "$dir/$value";
+      if(strpos($tmp,"wp-content") == false){      
         foreach(@$this->find_all_files("$dir/$value") as $value) 
         { 
-            $tmpFile = $value;
-			$tmpMd5 = @md5_file($tmpFile);
-			$result[]="$tmpFile|$tmpMd5"; 
+          $tmpFile = $value;
+    			$tmpMd5 = @md5_file($tmpFile);
+    			$result[]="$tmpFile|$tmpMd5"; 
         } 
+      }
     }
 	//var_dump($result);
   
     return $result; 
+    }
 }
 
 function fs_get_wp_config_path()
