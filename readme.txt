@@ -90,6 +90,9 @@ Or go to our user guide page at : wpsecurity.securemoz.com/about/faq
 7. Configuration Make files more secure using htaccess file, Protect file from public access on server-side.
 
 == Changelog ==
+= 1.0.3 =
+* Important update interface for WordPress core files deep scan.
+
 = 1.0.2 =
 * Important update SecureMoz Scan all WordPress core files for changes under server tab (Core Wordpress Files).
 
