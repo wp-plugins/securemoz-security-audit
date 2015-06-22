@@ -2665,16 +2665,17 @@ public function admin_form_chmod() {
 	}
 	$html .= "</tbody></table>";
 
-	//Change permissions
-	$t = "admin_form_chmod";
-	$html .='<form method="post" action="'. admin_url( 'admin.php?page='.$this->plugin_slug.'&tab=options_server').'">
-			<p class="submit"><input type="hidden" name="waudit_submitted_form" value="'.$t.'" />
-			'. wp_nonce_field("waudit_{$t}", "waudit_nonce_{$t}").'
-			<input type="submit" class="button-primary" value="Bulk fix permissions" />      
-			</p>
-			</form>
-			';
-	
+   if($this->check_for_files_permissios() === false){
+  	//Change permissions
+  	$t = "admin_form_chmod";
+  	$html .='<form method="post" action="'. admin_url( 'admin.php?page='.$this->plugin_slug.'&tab=options_server').'">
+  			<p class="submit"><input type="hidden" name="waudit_submitted_form" value="'.$t.'" /> 
+  			'. wp_nonce_field("waudit_{$t}", "waudit_nonce_{$t}");  
+    $html .='<input type="submit" class="button-primary" value="Bulk fix permissions" />';           
+  	$html .='</p></form>';
+	}else {
+    $html .= '<p>Unable to reach core files, This usually due to insufficient permissions on the directory. Please contact your hosting provider</p>';
+  }
 	$html .=  $this->postboxer('bottom');
 	return $html;
 }
@@ -3670,16 +3671,18 @@ public function scan_core_files(){
           <form id="analyze_core_files" action="" method="POST">
   				  <tr>
     					<td>
-    					 <button type="submit" name="submit" class="button-primary" value="submit">Run scan</button> 
-               <input type="hidden" name="waudit_scan_core_files" value="waudit_scan_core_files" />         
+              <button type="submit" name="submit" class="button-primary" value="submit">Run scan</button> 
+              <input type="hidden" name="waudit_scan_core_files" value="waudit_scan_core_files" />         
               </td>
             </tr>
           </form>
           </tbody>
           </table>');
-          if($_POST["waudit_scan_core_files"] === "waudit_scan_core_files") {
-            $html .= $this->do_scan_core_files();
-          }
+          if(is_admin()){
+            if($_POST["waudit_scan_core_files"] === "waudit_scan_core_files") {
+              $html .= $this->do_scan_core_files();
+            }
+          } else {$html .= "<table class=\"nsawide\"><tr><td>You must be administrator to use run this option</td></tr></table>";}
   $html .=  $this->postboxer('bottom');        
   echo $html;        
 }
@@ -3692,7 +3695,12 @@ public function do_scan_core_files(){
   $wpSigCodeArr[] = explode(" ",$wpSigCode);;//json_decode(json_encode($wpSigCode), true);
   $fewLines = explode("\n", $wpSigCode);
   $lastLine = $fewLines[count($fewLines) - 1];
-  $wpFiles = $this->find_all_files($this->fs_get_wp_config_path());
+  
+  $wpFiles0 = $this->find_all_files(get_home_path(),false);
+  $wpFiles1 = $this->find_all_files(get_home_path()."/wp-admin",true);
+  $wpFiles2 = $this->find_all_files(get_home_path()."/wp-includes",true);
+
+  $wpFiles = array_merge($wpFiles0,$wpFiles1,$wpFiles2);
 
   $countOK = 0;
  $countNot = 0; 
@@ -3719,14 +3727,32 @@ $html .=  $this->postboxer('top',"Core Wordpress Files");
 	$html .= "<table class=\"nsawide\"><thead><th>File Name</th><th>Status</th></thead><tbody>";			
 		
 	if(intval($lastLine) === intval($countOK)){$html .= "<tr><td>Core File Match</td><td>OK</td></tr>";}else{
-		for($c=0;$c<count($fewLines) - 1;$c++){
-					if($fewLines[$c] != ""){
-						$tmpC = explode(" ",$fewLines[$c]);
-						$html .= "<tr class=\"backgroundcolor-red\">";
-						$html .= "<td>".$tmpC[2]."</td>";						
-						$html .= "<td>Has been change</td></tr>";
-						}
-		}
+    $ipermissions = false;
+    for($c=0;$c<count($fewLines) - 1;$c++){
+      if(strpos($fewLines[$c],"insufficient permissions") ){
+         $html .= "<tr class=\"backgroundcolor-red\">";
+					$html .= "<td>".$fewLines[$c]."</td>";						
+					$html .= "<td>&nbsp;</td></tr>";
+          $ipermissions = true;
+      }
+    }
+    
+    $fileExist = false;
+    if($ipermissions === false) {
+  		for($c=0;$c<count($fewLines) - 1;$c++){
+  					if($fewLines[$c] != ""){                          
+    				$tmpC = explode(" ",$fewLines[$c]);
+            $tmpFile = $this->fs_get_wp_config_path()."/".$tmpC[2];
+              if(file_exists($tmpFile)){  
+                $fileExist = true;  
+    						$html .= "<tr class=\"backgroundcolor-red\">";
+    						$html .= "<td>".$tmpC[2]."</td>";						
+    						$html .= "<td>Has been change</td></tr>";
+  						  }
+            }
+  		}
+      if($fileExist === false) {$html .= "<tr><td>Core File Match</td><td>OK</td></tr>";}
+    }
 	}
 
 	$html .= "</tbody></table>";
@@ -3734,29 +3760,41 @@ $html .=  $this->postboxer('top',"Core Wordpress Files");
 return $html;
 }
 
-function find_all_files($dir) 
+function find_all_files($dir, $deep) 
 { 
   if(strpos($dir,"wp-content") == false){
   
     $root = scandir($dir); 
+    if(!is_array($root)){
+			$result[]="Unable to reach core files, This usually due to insufficient permissions on the directory. Please contact your hosting provider";
+      return $result;
+		}
     foreach($root as $value) 
     { 
       if($value === '.' || $value === '..') {continue;} 
       if(is_file("$dir/$value")) {
   			$tmpFile = "$dir/$value";
+			if(5000000>@filesize($tmpFile)){
+			
   			$tmpMd5 = @md5_file($tmpFile);
   			$result[]="$tmpFile|$tmpMd5";
+			}
   			continue;
   		} 
     
     $tmp = "$dir/$value";
-      if(strpos($tmp,"wp-content") == false){      
-        foreach(@$this->find_all_files("$dir/$value") as $value) 
-        { 
-          $tmpFile = $value;
-    			$tmpMd5 = @md5_file($tmpFile);
-    			$result[]="$tmpFile|$tmpMd5"; 
-        } 
+      if(strpos($tmp,"wp-content") == false){   
+		if($deep == true){
+			foreach(@$this->find_all_files("$dir/$value",true) as $value) 
+			{ 
+			  $tmpFile = $value;
+				  if(5000000>@filesize($tmpFile)){
+				
+					$tmpMd5 = @md5_file($tmpFile);
+					$result[]="$tmpFile|$tmpMd5"; 
+					}
+			} 
+		}
       }
     }
 	//var_dump($result);
@@ -3788,6 +3826,18 @@ function fs_get_wp_config_path()
     }
     return $path;
 }
+
+function check_for_files_permissios(){
+  $wpFilesTmp = $this->find_all_files(get_home_path()."/wp-admin",true);
+  foreach($wpFilesTmp as $f){
+    if(strpos($f,"insufficient permissions") ){
+      return true;
+    }
+    
+  }
+  
+  return false;
+} 
 
 }
 
