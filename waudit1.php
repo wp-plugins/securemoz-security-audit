@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: SecureMoz Security Audit
-Version: 1.0.3
+Version: 1.0.4
 Plugin URI: http://wpsecurity.securemoz.com/
 Author: Ram, Haim
 Author URI: http://wpsecurity.securemoz.com/
@@ -17,7 +17,6 @@ require_once("class/waudit_Compress.php");			// Compress class compresses backup
 require_once("class/waudit_Mail.php"); 				// Mail class sends backups over email
 require_once("class/waudit_Cron.php"); 				// Cron class schedules backups
 require_once("class/waudit_View.php"); 				// View class renders output
-require_once("class/VirusTotalApiV2.php"); 				// View class renders output VirusTotalApiV2
 require_once("class/__functions.php"); 				// View class renders output our custom waudit API malware scanner
 #if (!class_exists('GakplSecurityAudit')):
 
@@ -1307,6 +1306,7 @@ $generated_content = <<<EOF
 				
 				<tr class="$el_class"><td><img style="position:relative;top:5px;" alt="$el_img" src="$this->imgmalware$el_img.png" /></td><td><b>Embedded Link To Malicious Site</b></td><td>$el_status</td></tr>
 
+<tr><td colspan="2"><div align="center"><h2><p style="background-color: #F1D41E;height;20px;"><a href="https://securemoz.com" target="_blank">Visit SecureMoz.com For Website Anti-Malware Monitoring & Alerting Service</a>.</p></h2></div></td></tr>
 
 
 </tbody></table></div></div></div>
@@ -1318,34 +1318,7 @@ echo $generated_content;
 }
 	if(isset($_POST['url'])) {
           $this->malware_verifire("&f=dgdgd");    
-        $api = new VirusTotalAPIV2('4bfe45b88d78da0c6e1a0d2483aaa07e03ead242e451173a2173e178e998184d');
-        $result = $api->scanURL($_POST['url']);
-        $report = $api->getURLReport($_POST['url']);
-        //var_dump($report);
-       
-       
-       print('
-       <div style="width:100%; margin-right:0%; float:left;"><div class="postbox"><h3><span>VirusTotal Security malware and virus audit</span></h3><div class="inside"><div class="columns3"><div class="col col1"><input class="knob" data-thickness=".4" data-readOnly=true value="100" data-width="120" data-bgColor="#A4C639" data-fgColor="#A4C639"></div><div class="col col2"><p><strong>VirusTotal Report </strong><br/><br/><br/>
-					
-					<a class="button-primary" href="' . $api->getReportPermalink($report, FALSE) . '" target="_blank">See your report on Virustotal</a>
-					</p>
-					</div>
-					<div class="col col3"><h2>We executed <strong>' . $api->getTotalNumberOfChecks($report) . '/53</strong> checks.</h2><p>If you found some issues, please, visit the official VirusTotal Analysis Report or try to search on Google how you can resolve the problem.</p></div></div><div class="clear"></div></div></div></div>
-       
-       
-       
-       ');
-        
-       print('<div style="width:100%; margin-right:0%; float:left;"><div class="postbox"><h3><span>Detailed results from VirusTotal malware and virus audit</span></h3><div class="inside"><table class="nsawide"><thead>
-       <th>Who</th><th>Says</th></thead><tbody>');
-       foreach($report->scans as $key => $array) {
-    $data = $array->detected === true ? '<span style="color:#ff6347;">Detected</span>' : '<span style="color: #A4C639;">Undetected</span>';
-    $color = $array->detected === true ? 'backgroundcolor-red' : 'backgroundcolor-green';
-    echo '<tr class="' . $color . '"><td><strong>' . $key .'</strong></td><td> ' . $data . '</td></tr>';
-       };
-        print("</tbody></table></div></div></div>");
-        
-   
+           
    
 } else {
        
@@ -1353,17 +1326,10 @@ echo $generated_content;
         echo('
         <div id="loading" class="loading-invisible">Scanning...</div>
         <div style="width:100%; margin-right:0%; float:left;"><div class="postbox"><h3><span>Malware & Viruses Scanner</span></h3><div class="inside">
-<table class="form-table">        
+<table class="form-table" border="0">        
 <tbody>
 <form id="analyze" action="" method="POST">
-				<tr>
-					<th scope="row">VirusTotal API*</th>
-					<td>
-					<label for="VIRUS_API"></label><input id="VIRUS_API" type="text" value="" name="VIRUS_API" class="standardinputtext">
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
+				<tr><th scope="row"></th>
                     <td>
 					<label for="url"></label><input type="hidden" value="' . $this->root_url .'" name="url" id="url" class="standardinputtext">
                     <input type="hidden" value="1" id="id" name="id" />
@@ -1371,10 +1337,10 @@ echo $generated_content;
                 </tr>
                 <tr>
                 <th scope="row" height="5"></th>
-                <td> ');
+                <td align="left" valign="top">');
                 if($this->malware_verifire("&f=dlimit") == 0)  
                   {
-                    echo '<button type="submit" name="submit" class="button-primary" value="submit">Run scan</button>';
+                    echo '<button type="submit" name="submit" class="button-primary"  value="submit">Run scan</button>';
                   }else{
                     echo '<div align="left"><font color="#FF6347"><b>Monthly Limit Reached</b></font><br>Please Consider<br/><a href="http://wpsecurity.securemoz.com/" title="SecureMoz PRO Version" target="_blank"><img src="'. $this->imgdir.'upgrade_now.png" /></a></div>';
                   }
@@ -1384,12 +1350,12 @@ echo $generated_content;
 				</tbody>
 			</table>
             
-            <p><small>* We provide as default our public Api Key, so if you attempt to use it and you get limitations we recommend you to <a href="https://www.virustotal.com/es/documentation/public-api/" target="_blank">get your own VirusTotal API key here</a>.</small></p>
             <p><small>We use our custom Securemoz Waudit API to connect with some public and private resources and other APIs.</small></p>
             <p><small><strong>Note:</strong> this site just checks for common problems, a pass from here doesn\'t guarantee your site isn\'t hacked. We check for Viruses, Malware, Blacklist, Drive-By Downloads, Malicious Downloads, Worms, Suspicious Applications, Suspicious Browser Changes, Security Risks, Heuristic Viruses, Adware, Trojans, Phishing Attacks, Spyware, Backdoors, Remote Access Software, Information Stealers, Dialers, Downloaders and Embedded Link To Malicious Site, among many others, in more than 53 differents sites.<br/><br/>
-
+</small>
+<small>
 Google works to provide the most accurate and up-to-date phishing and malware information. However, it cannot guarantee that its information is comprehensive and error-free: some risky sites may not be identified, and some safe sites may be identified in error.</small></p>
-<p><small><a href="https://securemoz.com" target="_blank">Visit our site to scan remote urls</a>.</small></p>
+<div align="center"><h3><p style="background-color: #F1D41E;height;20px;"><a href="https://securemoz.com" target="_blank">Visit SecureMoz.com For Website Anti-Malware Monitoring & Alerting Service</a>.</p></h3></div>
             </div></div></div>
             ');
        
@@ -1655,7 +1621,7 @@ $html 	=  $this->postboxer('top',"Backup");
 
 	$html .= '</form>';
 $html .=  $this->postboxer('bottom');
-
+$html .= '<p><div align="center"><h2><p style="background-color: #F1D41E;height;20px;"><a href="https://securemoz.com" target="_blank">Visit SecureMoz.com For Website Anti-Malware Monitoring & Alerting Service</a>.</div></p>';
 	return $html;
 }
 
@@ -2187,9 +2153,10 @@ public function admin_form_options_settings_php() {
 
 	}
 
-	$html .= '<b>Update Settings Available Only In PRO Version</b><br>';
+	$html .= '<b>Update Settings Available Only In SecureMoz PRO Version</b><br>';
 	$html .= '<br><a href="http://wpsecurity.securemoz.com/" title="SecureMoz PRO Version" target="_blank"><img src="'. $this->imgdir.'upgrade_now.png" /></a>';
 	$html .=  $this->postboxer('bottom');
+	$html .= '<p><div align="center"><h2><p style="background-color: #F1D41E;height;20px;"><a href="https://securemoz.com" target="_blank">Visit SecureMoz.com For Website Anti-Malware Monitoring & Alerting Service</a>.</div></p>';
 
 	return $html;			
 }
@@ -2752,6 +2719,7 @@ public function admin_form_htaccess_secure() {
 			</form>
 			';
 	$html .=  $this->postboxer('bottom');
+	$html .= '<p><div align="center"><h2><p style="background-color: #F1D41E;height;20px;"><a href="https://securemoz.com" target="_blank">Visit SecureMoz.com For Website Anti-Malware Monitoring & Alerting Service</a>.</div></p>';
 	return $html;		
 }
 
@@ -3213,7 +3181,7 @@ public function admin_form_safety_test3() {
 		$html .= "<div id=\"legendbox\">";
 		$html .= '<p>'.$this->H->gtml_img('hammer_arrow.png', array('title'=>'Waudit fix available')).' Waudit fix available - Waudit plugin can solve the issue</p>';
 		$html .= '<p>'.$this->H->gtml_img('hammer_plus.png', array('title'=>'Wordpress fix available')).' Wordpress fix available - Issue can be solved by changing a setting in Wordpress Dashboard</p>';
-		$html .= '<p>'.$this->H->gtml_img('hammer_pencil.png', array('title'=>'Tip available')).' Tip available - Solution requires external access such as access to server configuration files</p>';
+		$html .= '<p>'.$this->H->gtml_img('hammer_pencil.png', array('title'=>'Tip available')).' Tip available - Solution requires external access such as access to server configuration files</p><br><p><div align="center"><h2><p style="background-color: #F1D41E;height;20px;"><a href="https://securemoz.com" target="_blank">Visit SecureMoz.com For Website Anti-Malware Monitoring & Alerting Service</a>.</div></p>';
 				
 		$html .= "</div>";			
 		$html .=  $this->postboxer('bottom');
@@ -3244,6 +3212,7 @@ public function admin_form_user_username() {
 			</form>
 			';
 	$html .=  $this->postboxer('bottom');
+	$html .= '<p><div align="center"><h2><p style="background-color: #F1D41E;height;20px;"><a href="https://securemoz.com" target="_blank">Visit SecureMoz.com For Website Anti-Malware Monitoring & Alerting Service</a>.</div></p>';
 	return $html;
 }
 public function do_form_admin_form_user_username() {
@@ -3349,14 +3318,16 @@ public function waudit_sidebar() {
      $html .= "<UL><LI><a href=\"http://wpsecurity.securemoz.com\" target=\"_blank\" title=\"SecureMoz Pro\"><b>Learn About Pro Features</b></a><br/><br/></LI>";
      $html .= "<LI><a href=\"#\" target=\"_blank\" title=\"SecureMoz User Guide\" onclick=\"javascript:window.open('$this->docs/index.html','SecureMoz User Guide','directories=no,titlebar=no,toolbar=no,status=no,menubar=yes,scrollbars=yes,resizable=yes,width=850,height=550');return false;\">SecureMoz User Guide</a><br/><br/</LI>";
     $html .= "<LI><a href=\"http://wpsecurity.securemoz.com/install-service/\" title=\"Install Service\" target=\"_blank\">We Can Help</a><br/><br/></LI>";
+ $html .= "<LI><a href=\"https://wordpress.org/support/view/plugin-reviews/securemoz-security-audit/\" title=\"SecureMoz Free Feedback\" target=\"_blank\">SecureMoz Feedback</a><br/><br/></LI>";
     $html .= "<LI><a href='http://twitter.com/share?text=Dont%20miss%20this%20%23security%20%23audit%20%23plugin%20for%20%23Wordpress!&amp;url=https://securemoz.com&amp;via=Securemoz&amp;count=none' target='_blank'><i class=\"icon-twitter\"></i>&nbsp;Share on Twitter</a><br/><br/></LI>";
     $html .= "<LI><a href='http://www.facebook.com/sharer/sharer.php?u=#wpsecurity.securemoz.com%20Site%20%23Clean%20by%20%23SecureMoz%20%23Plugin%20Try%20yours!!&amp;url=https://www.securemoz.com&amp;via%23securemoz&amp;count=none' target='_blank'><i class=\"icon-facebook\"></i>&nbsp;Like on Facebook</a><br/><br/></LI>";
 	$html .= "<LI><a href='https://plus.google.com/share?url=wpsecurity.securemoz.com%23Clean%20by%20%23SecureMoz%20%23Plugin%20Try%20yours!!&amp;url=https://wpsecurity.securemoz.com&amp;via%23securemoz&amp;count=none' target='_blank'><i class='icon-google-plus'>&nbsp;Love on Google+</i></a><br/><br/></LI></UL>";
     $html .= "<div align=\"center\"><form action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_blank'><input type='hidden' name='cmd' value='_s-xclick'><input type='hidden' name='hosted_button_id' value='XRC95RT6YJDTG'><input type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'><img alt='' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'></form><br/><strong>Support SecureMoz <font color='green'>FREE</font></strong><br/><br/></div>";
+
     $html .= '<div align="left"><p><a href="http://webmaster.securehunter.com/" target="_blank" title="SSL & Security/Hosting/Marketing Tools"><strong>Webmaster Toolkit</strong></a></p>';    
 	$html .= '<p><a href="http://store.templatemonster.com/wordpress-themes.php?aff=securemoz" target="_blank" title="Premium WordPress Theme"><strong>Premium WordPress Themes</strong></a></p></div>'; 
     $html .=  "<img src=\"". $this->imgdir."waudit_logo_200.png\" style=\"position: relative; margin-top: 30px; margin-left: 20%;\" />";
-    $html .= '<div align="center">SecureMoz &copy; '.date('Y').' Powered by<br/> <a href="http://www.securehunter.com" target="_blank" title="Secure Hunter Anti-Malware">SecureHunter.com &reg;</a><br/> </div>';
+    $html .= '<div align="center">SecureMoz &copy; '.date('Y').' Powered by<br/> <a href="https://securemoz.com/" target="_blank" title="Malware removal service">securemoz.com &reg;</a><br/> </div>';
     $html .=  $this->postboxer('bottom');
 	return $html;
 }
