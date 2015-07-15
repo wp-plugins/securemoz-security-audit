@@ -1306,7 +1306,7 @@ $generated_content = <<<EOF
 				
 				<tr class="$el_class"><td><img style="position:relative;top:5px;" alt="$el_img" src="$this->imgmalware$el_img.png" /></td><td><b>Embedded Link To Malicious Site</b></td><td>$el_status</td></tr>
 
-<tr><td colspan="2"><div align="center"><h2><p style="background-color: #F1D41E;height;20px;"><a href="https://securemoz.com" target="_blank">Visit SecureMoz.com For Website Anti-Malware Monitoring & Alerting Service</a>.</p></h2></div></td></tr>
+
 
 
 </tbody></table></div></div></div>
@@ -3324,11 +3324,9 @@ public function waudit_sidebar() {
 	$html .= "<LI><a href='https://plus.google.com/share?url=wpsecurity.securemoz.com%23Clean%20by%20%23SecureMoz%20%23Plugin%20Try%20yours!!&amp;url=https://wpsecurity.securemoz.com&amp;via%23securemoz&amp;count=none' target='_blank'><i class='icon-google-plus'>&nbsp;Love on Google+</i></a><br/><br/></LI></UL>";
     $html .= "<div align=\"center\"><form action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_blank'><input type='hidden' name='cmd' value='_s-xclick'><input type='hidden' name='hosted_button_id' value='XRC95RT6YJDTG'><input type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'><img alt='' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'></form><br/><strong>Support SecureMoz <font color='green'>FREE</font></strong><br/><br/></div>";
 
-	$html .= '<div align="left"><p><a href="https://securemoz.com/" target="_blank" title="Malware Removal Services"><strong>Malware Removal Service</strong></a></p>';    
-    $html .= '<div align="left"><p><a href="http://webmaster.securehunter.com/" target="_blank" title="SSL & Security/Hosting/Marketing Tools"><strong>Webmaster Toolkit</strong></a></p>';    
+	$html .= '<div align="left"><p><a href="http://webmaster.securehunter.com/" target="_blank" title="SSL & Security/Hosting/Marketing Tools"><strong>Webmaster Toolkit</strong></a></p>';    
 	$html .= '<p><a href="http://store.templatemonster.com/wordpress-themes.php?aff=securemoz" target="_blank" title="Premium WordPress Theme"><strong>Premium WordPress Themes</strong></a></p></div>'; 
     $html .=  "<img src=\"". $this->imgdir."waudit_logo_200.png\" style=\"position: relative; margin-top: 30px; margin-left: 20%;\" />";
-    $html .= '<div align="center">SecureMoz &copy; '.date('Y').' Powered by<br/> <a href="https://securemoz.com/" target="_blank" title="Malware removal service">securemoz.com &reg;</a><br/> </div>';
     $html .=  $this->postboxer('bottom');
 	return $html;
 }
