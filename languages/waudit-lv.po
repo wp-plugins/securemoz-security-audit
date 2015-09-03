@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Confodio\n"
+"POT-Creation-Date: 2013-09-30 19:07+0100\n"
+"PO-Revision-Date: 2013-09-30 19:09+0100\n"
+"Last-Translator: Gundars Meness <me@gundars.me>\n"
+"Language-Team: Confodio <info@confodio.com>\n"
+"Language: Latviešu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: /localhost/dev/akasseindex.dk/wp-content/plugins/"
+"confodio-security-audit\n"
+
+#: /localhost/dev/akasseindex.dk/wp-content/plugins/confodio-security-audit/ConfodioSecurityAudit.php:518
+msgid "Audit"
+msgstr "Audits"
+
+#: /localhost/dev/akasseindex.dk/wp-content/plugins/confodio-security-audit/ConfodioSecurityAudit.php:519
+msgid "Settings"
+msgstr "Iestatījumi"
+
+#: /localhost/dev/akasseindex.dk/wp-content/plugins/confodio-security-audit/ConfodioSecurityAudit.php:520
+msgid "Backup"
+msgstr "Dublēšana"
+
+#: /localhost/dev/akasseindex.dk/wp-content/plugins/confodio-security-audit/ConfodioSecurityAudit.php:521
+msgid "Database"
+msgstr "Datubāze"
+
+#: /localhost/dev/akasseindex.dk/wp-content/plugins/confodio-security-audit/ConfodioSecurityAudit.php:522
+msgid "Server"
+msgstr "Serveris"
+
+#: /localhost/dev/akasseindex.dk/wp-content/plugins/confodio-security-audit/ConfodioSecurityAudit.php:523
+msgid "User"
+msgstr "Lietotājs"
+
+#: /localhost/dev/akasseindex.dk/wp-content/plugins/confodio-security-audit/ConfodioSecurityAudit.php:524
+msgid "Configuration"
+msgstr "Konfigurācija"
+
+#: /localhost/dev/akasseindex.dk/wp-content/plugins/confodio-security-audit/ConfodioSecurityAudit.php:525
+msgid ".htaccess"
+msgstr ""
