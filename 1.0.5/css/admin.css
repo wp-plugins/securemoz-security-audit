@@ -1,0 +1,324 @@
+.wauditadmin .clear {
+	clear: both;
+}
+.myIframe {
+position: relative;
+padding-bottom: 65.25%;
+padding-top: 30px;
+height: 0;
+overflow: auto; 
+-webkit-overflow-scrolling:touch;
+border: none;
+} 
+.myIframe iframe {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+.wauditadmin .color-red {
+	color:red;
+}
+.wauditadmin .color-green {
+	color:green;
+}
+.wauditadmin .color-orange {
+	color:orange;
+}
+.wauditadmin .backgroundcolor-red {
+	background-color: #FFEBE8;
+}
+.wauditadmin .backgroundcolor-green {
+	background-color: #e8ffeb;
+}
+.wauditadmin .marginzero {
+	margin-top:0px;
+	margin-bottom:0px;
+	margin-left:0px;
+	margin-right:0px;
+}
+
+.wauditadmin table.nsawide {
+	width:100%;
+}
+.wauditadmin table.nsawide th, .wauditadmin table.nsawide td  {
+	text-align:left;
+	padding: 2px 6px;
+}
+.wauditadmin .postbox {
+	min-width:200px;
+	position:relative;
+}
+
+.wauditadmin .inbox-left {
+
+	width:40%;
+	
+}
+.wauditadmin .inbox-right {
+ position:absolute;
+ top:0;
+ right:0;
+ width:40%;
+}
+.wauditadmin span.clear { clear: left; display: block; } {
+ position:absolute;
+ top:0;
+ left:0;
+ width:60%;
+}
+.wauditadmin .postbox h3 img {
+	margin: -2px 10px -2px -2px;
+}
+
+.wauditadmin .inbox-right-n {
+ position:absolute;
+ top:0;
+ right:0;
+ width:75%;
+}
+.wauditadmin .inbox-right-n p {
+margin:0 5%;
+padding:0;
+}
+
+.wauditadmin .justifier {
+	text-align: justify;
+}
+
+.wauditadmin .columns3 {
+	width: 100%;
+}
+.wauditadmin .columns3 .col {
+	/*background: #f1f1f1;
+	background-image: -webkit-gradient(linear,left bottom,left top,from(#ececec),to(#f9f9f9));
+	background-image: -webkit-linear-gradient(bottom,#ececec,#f9f9f9);
+	background-image: -moz-linear-gradient(bottom,#ececec,#f9f9f9);
+	background-image: -o-linear-gradient(bottom,#ececec,#f9f9f9);
+	background-image: linear-gradient(to top,#ececec,#f9f9f9);*/
+    background: #fff;
+    border: 1px solid #d4d4d4;
+    border-radius: 2px;
+	margin: 0.5%;
+	padding: 10px;
+	min-height: 120px;
+	height: 120px;
+	float: left;
+	text-align: center;
+	min-width: 130px;
+	line-height: 1.1;
+	font-size: 14px;
+}
+.wauditadmin .columns3 .col1 {
+	width: 19%;	
+	line-height: 1.3;
+	font-size: 72px;
+}
+
+.wauditadmin .columns3 .col2 {
+	width: 20%;
+}
+.wauditadmin .columns3 .col3 {
+	width: 50%;
+}
+
+
+.wauditadmin .columns3 .col2 p {
+	line-height: 1.3;
+}
+.wauditadmin .columns3 .col3 p {
+	line-height: 1.1;
+}
+.wauditadmin #legendbox {
+	padding: 10px;
+	margin: 10px 5px;
+}
+
+.wauditadmin .form-table th {
+	font-weight: normal;
+	font-size: 12px;
+}
+
+.wauditadmin .form-table .standardinputtext {
+	 width: 20em;
+}
+.wauditadmin form p {
+	 padding: 0 10px;
+}
+
+.wauditadmin .normaltitle {
+	margin: 1em 0;
+	display: block;
+	font-weight: bold;
+	color: #333;
+	font-family: sans-serif;
+	font-size: 16px;
+	line-height: 1.4em;
+	padding: 0;
+}
+
+.narrowlist li {
+	margin: 0;
+	padding: 0;
+}
+
+
+
+.wauditadmin .inner-sidebar {
+	z-index: 980;
+}
+
+
+
+
+
+
+.wauditadmin textarea, .wauditadmin input, .wauditadmin select {
+font-size: 12px;
+padding: 1px 5px;
+line-height: 12px;
+border-radius: 0;
+}
+
+
+
+
+
+div.loading-invisible{
+   display:none;
+}
+
+
+div.loading-visible{
+    
+    text-align:center;
+
+}
+
+
+
+
+section.sliding {
+	height: 0.8em;
+	margin: 5px auto 0;
+
+	position: relative;
+	clear: both;
+
+	background: blue;
+	visibility: hidden;
+}
+
+
+#slider{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #333 #333 #777 #333;
+	border-radius: 25px;
+	width: 100px;
+	position: absolute;
+	height: 13px;
+	background-color: #8e8d8d;
+	background: url('/wp-content/plugins/gakpl-security-audit/images/bg-track.png') repeat top left;
+    box-shadow: inset 0 1px 5px 0px rgba(0, 0, 0, .5), 
+    				  0 1px 0 0px rgba(250, 250, 250, .5);
+    left: 20px;
+}
+.ui-slider-handle {
+	position: absolute;
+	z-index: 2;
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	background: url('/wp-content/plugins/gakpl-security-audit/images/handle.png') no-repeat 50% 50%;
+	font-weight: bold;
+	color: #1C94C4;
+	outline: none;
+	top: -7px;
+	margin-left: -12px;
+}
+.ui-slider-range {
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #eaeaea 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* IE10+ */
+	background: linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 ); /* IE6-9 */
+	position: absolute;
+	border: 0;
+	top: 0;
+	height: 100%;
+	border-radius: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.sliderresultb {
+	border:0;
+	/*color:#f6931f;*/
+	color:#128a00;
+	font-size: 110%;
+	font-weight: bold;
+}
+
+.sliderresulta {
+	font-size: .9em;
+}
+.singleslider {
+
+	margin:10px 0;
+}
+
+.ui-slider-handle {
+
+	border: none;
+	position:absolute;
+	top:-8px;
+	margin-left:-12px;
+	z-index:200;
+
+}
+
+/*This is the fill bar colour*/
+.ui-widget-header {
+	background: #8ae234;
+	/*background: #CD5C5D;*/
+	/*position: absolute;*/
+}
+
+.wauditadmin .metabox-holder {
+min-height: 40px;
+}
+
+.wauditadmin .columns3 .col3 p {
+margin: 0.4em 0;
+}
+
+.wauditadmin .inner-sidebar .postbox .inside {
+margin: 11px 0;
+position: relative;
+margin-top: -20px;
+}
