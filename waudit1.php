@@ -3315,10 +3315,10 @@ public function waudit_sidebar() {
   js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=1450266808561789";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, \'script\', \'facebook-jssdk\'));</script>';
-     $html .= "<UL><LI><a href=\"http://wpsecurity.securemoz.com\" target=\"_blank\" title=\"SecureMoz Pro\"><b>Learn About Pro Features</b></a><br/><br/></LI>";
-     $html .= "<LI><a href=\"#\" target=\"_blank\" title=\"SecureMoz User Guide\" onclick=\"javascript:window.open('$this->docs/index.html','SecureMoz User Guide','directories=no,titlebar=no,toolbar=no,status=no,menubar=yes,scrollbars=yes,resizable=yes,width=850,height=550');return false;\">SecureMoz User Guide</a><br/><br/</LI>";
+    $html .= "<UL><LI><a href=\"http://wpsecurity.securemoz.com\" target=\"_blank\" title=\"SecureMoz Pro\"><b>Learn About Pro Features</b></a><br/><br/></LI>";
+    $html .= "<LI><a href=\"#\" target=\"_blank\" title=\"SecureMoz User Guide\" onclick=\"javascript:window.open('$this->docs/index.html','SecureMoz User Guide','directories=no,titlebar=no,toolbar=no,status=no,menubar=yes,scrollbars=yes,resizable=yes,width=850,height=550');return false;\">SecureMoz User Guide</a><br/><br/</LI>";
     $html .= "<LI><a href=\"http://wpsecurity.securemoz.com/install-service/\" title=\"Install Service\" target=\"_blank\">We Can Help</a><br/><br/></LI>";
- $html .= "<LI><a href=\"https://wordpress.org/support/view/plugin-reviews/securemoz-security-audit/\" title=\"SecureMoz Free Feedback\" target=\"_blank\">SecureMoz Feedback</a><br/><br/></LI>";
+    $html .= "<LI><a href=\"https://wordpress.org/support/view/plugin-reviews/securemoz-security-audit/\" title=\"SecureMoz Free Feedback\" target=\"_blank\">SecureMoz Feedback</a><br/><br/></LI>";
     $html .= "<LI><a href='http://twitter.com/share?text=Dont%20miss%20this%20%23security%20%23audit%20%23plugin%20for%20%23Wordpress!&amp;url=https://securemoz.com&amp;via=Securemoz&amp;count=none' target='_blank'><i class=\"icon-twitter\"></i>&nbsp;Share on Twitter</a><br/><br/></LI>";
     $html .= "<LI><a href='http://www.facebook.com/sharer/sharer.php?u=#wpsecurity.securemoz.com%20Site%20%23Clean%20by%20%23SecureMoz%20%23Plugin%20Try%20yours!!&amp;url=https://www.securemoz.com&amp;via%23securemoz&amp;count=none' target='_blank'><i class=\"icon-facebook\"></i>&nbsp;Like on Facebook</a><br/><br/></LI>";
 	$html .= "<LI><a href='https://plus.google.com/share?url=wpsecurity.securemoz.com%23Clean%20by%20%23SecureMoz%20%23Plugin%20Try%20yours!!&amp;url=https://wpsecurity.securemoz.com&amp;via%23securemoz&amp;count=none' target='_blank'><i class='icon-google-plus'>&nbsp;Love on Google+</i></a><br/><br/></LI></UL>";

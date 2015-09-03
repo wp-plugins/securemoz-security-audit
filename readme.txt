@@ -3,8 +3,8 @@ Contributors: securemoz
 Donate link: http://wpsecurity.securemoz.com/
 Tags: security, security plugin, virus, virus detection, vulnerability, website security, wordpress security plugin, wordpress security, anti-malware, malware, secure, multi-site, network, login, lockdown, htaccess, hack, header, cleanup, ban, restrict, access, protect, protection, admin, username, database, prefix, wp-content, rename, directory, directories, secure, SSL,Anti Virus, antivirus, attack, backdoor, base64, block, google safe browsing, hack, hacker, hacking, htaccess, iframe, injection, malware, malware removal, prevent, protect, protection, scan, scanner, secure website
 Requires at least: 3.9
-Tested up to: 4.2
-Stable tag: 1.0.4
+Tested up to: 4.3
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,6 +110,13 @@ Or go to our user guide page at : wpsecurity.securemoz.com/about/faq
 7. Configuration Make files more secure using htaccess file, Protect file from public access on server-side.
 
 == Changelog ==
+
+= 1.0.5 =
+* Improve WordPress core files speed scan engine match 4.3
+* Core Wordpress files scanner is under SERVER TAB
+* Remove Ads from free version
+
+
 = 1.0.4 =
 * Improve WordPress core files deep scan engine
 * Core Wordpress File Scanner is under SERVER TAB
